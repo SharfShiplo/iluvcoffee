@@ -8,7 +8,10 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
+<<<<<<< HEAD
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
+=======
+>>>>>>> 247190a (updated with nest cli-v7)
 import { CoffeesService } from './coffees.service';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto';
@@ -18,8 +21,9 @@ export class CoffeesController {
   constructor(private readonly coffeesService: CoffeesService) {}
 
   @Get()
-  findAll(@Query() paginationQuery: PaginationQueryDto) {
-    return this.coffeesService.findAll(paginationQuery);
+  findAll(@Query() paginationQuery: any): any[] {
+    // const { limit, offset } = paginationQuery;
+    return this.coffeesService.findAll();
   }
 
   @Get(':id')
@@ -29,7 +33,7 @@ export class CoffeesController {
 
   @Post()
   create(@Body() createCoffeeDto: CreateCoffeeDto): any {
-    // console.log(createCoffeeDto instanceof CreateCoffeeDto);
+    console.log(createCoffeeDto instanceof CreateCoffeeDto);
     return this.coffeesService.create(createCoffeeDto);
   }
 
@@ -43,6 +47,6 @@ export class CoffeesController {
 
   @Delete(':id')
   delete(@Param('id') id: number): any {
-    return this.coffeesService.remove(id);
+    return this.coffeesService.delete(id);
   }
 }
